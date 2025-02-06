@@ -10,7 +10,7 @@ const About = () => {
           About Us
         </Typography>
         <Typography variant="h6" color="textSecondary">
-          Delivering Excellence, Innovation, and Quality hello there
+          Delivering Excellence, Innovation, and Quality hello theree
         </Typography>
       </Box>
 
