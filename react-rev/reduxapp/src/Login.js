@@ -86,6 +86,9 @@ function Login() {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Login
           </Button>
+          <Button type="button" onClick={()=>navigate('/signup')} variant="contained" color="primary" fullWidth>
+            Signup
+          </Button>
         </Box>
       </Paper>
     </Container>

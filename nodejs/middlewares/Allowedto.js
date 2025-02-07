@@ -8,7 +8,6 @@ function Allowedto(fields = []){
             res.authority = true   
         }else{
             res.authority = false
-            console.log("false")
         }
         req.user = user
         next()

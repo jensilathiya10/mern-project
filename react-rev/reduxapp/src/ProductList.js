@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from "./productSlice";
 import "./ProductList.css";
-
+import Card from "./components/Card"
+import "./style/Products.css"
 const ProductList = () => {
   const dispatch = useDispatch();
 
@@ -19,22 +20,16 @@ const ProductList = () => {
   else {
     return (
       <div>
-        <div className="product-container">
-          {products.map((product) => (
-            <div key={product._id} className="product-card">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              <h3 className="product-title">{product.name}</h3>
-              <p className="product-description">{product.description}</p>
-              <p className="product-price">{product.price}</p>
+            <div className="product_cards">
+                {
+                    Object.values(products).map((product) => (
+                        <Card product={product} />
+                    ))
+                }
             </div>
-          ))}
+
+
         </div>
-         
-      </div>
     );
   }
 };

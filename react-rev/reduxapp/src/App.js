@@ -8,6 +8,8 @@ import Product from "./Product";
 import { Route, BrowserRouter, Routes, Router } from 'react-router-dom';
 import PrivateRoute from './services/PrivateRoute';
 import Navbar from './utils/nav';
+import Cart from './Cart';
+import Signup from './Signup';
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +21,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<Product />} />
+        <Route path='/cart' element={<Cart/>}/>
+        <Route path="/signup" element={<Signup/>}/>
       </Routes>
     </BrowserRouter>
   )

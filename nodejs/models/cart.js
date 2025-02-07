@@ -1,9 +1,20 @@
 const mongoose = require("mongoose");
 
 const cartschema = mongoose.Schema({
-    name:String,
-    roll:Number,
-    classe:String
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref : "users",
+    },
+    items: [
+        {
+            product:{type:mongoose.Schema.Types.ObjectId , ref:"products"},
+            quantity:{type:Number,default:1},
+            datetime:{
+                type: Date,
+                default: Date.now, 
+              }
+        }
+    ]
 })
 
 const cart = mongoose.model("cart",cartschema);
