@@ -28,7 +28,7 @@ const About = () => {
       {/* Our Mission & Values */}
       <Box sx={{ mt: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Our Mission & Values
+          Our Mission
         </Typography>
         <Typography variant="body1">
           Our mission is to enhance customer satisfaction through cutting-edge products and top-tier customer support. 
