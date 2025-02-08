@@ -13,15 +13,32 @@ const cartdata = async (req, res) => {
         })
     }
 }
-const addproducttocart = async (req, res) => {
+
+const removeproductfromcart = async (req, res) => {
     if (req.user) {
         let user = await users.findById(req.user._doc._id)
         if(!user){
             return res.status(404).json({message:"user not found"})
         }
-        await user.cart.push({product:req.body.product})
+
+        const selectedproduct = user.cart.filter((item)=>{
+            if(item.product.toString() == req.body.product){
+                return item
+            }
+            
+        })
+        if(selectedproduct.length>0){
+            if(selectedproduct[0].quantity>1){
+
+                selectedproduct[0].quantity -= 1     
+            }
+            else{
+                user.cart = user.cart.filter((item) => item.product.toString() !== req.body.product);
+            }
+        }
+
         user.save();
-        const cartdata = await cart.find({});
+        const cartdata = await users.find({})
         res.status(200).json({ cartdata })
     }
     else {
@@ -31,4 +48,36 @@ const addproducttocart = async (req, res) => {
     }
 }
 
-module.exports = {cartdata,addproducttocart}
+const addproducttocart = async (req, res) => {
+    if (req.user) {
+        let user = await users.findById(req.user._doc._id)
+        if(!user){
+            return res.status(404).json({message:"user not found"})
+        }
+
+        const selectedproduct = user.cart.filter((item)=>{
+            if(item.product.toString() == req.body.product){
+                return item
+            }
+            
+        })
+
+        if(selectedproduct.length>0){
+            selectedproduct[0].quantity += 1     
+        }
+        else{
+            await user.cart.push({product:req.body.product})
+        }
+        // console.log(user.cart)
+        user.save();
+        const cartdata = await users.find({})
+        res.status(200).json({ cartdata })
+    }
+    else {
+        res.status(401).json({
+            error: "unauthorized"
+        })
+    }
+}
+
+module.exports = {cartdata,addproducttocart,removeproductfromcart}
