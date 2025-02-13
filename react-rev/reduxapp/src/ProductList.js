@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from "./productSlice";
 import "./ProductList.css";
 import Card from "./components/Card"
-import "./style/Products.css"
+import "./style/Products.css";
 const ProductList = () => {
   const dispatch = useDispatch();
 
@@ -11,8 +11,11 @@ const ProductList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
   const { products, status } = useSelector((state) => state.products);
-  console.log(status);
-  console.log(products)
+  // console.log(status);
+  // console.log(products)
+
+
+
 
   if (status != "success") {
     return <div>Loading...</div>;
@@ -20,16 +23,16 @@ const ProductList = () => {
   else {
     return (
       <div>
-            <div className="product_cards">
-                {
-                    Object.values(products).map((product) => (
-                        <Card product={product} />
-                    ))
-                }
-            </div>
-
-
+        <div className="product_cards">
+          {
+            Object.values(products).map((product) => (
+              <Card product={product} />
+            ))
+          }
         </div>
+       
+
+      </div>
     );
   }
 };

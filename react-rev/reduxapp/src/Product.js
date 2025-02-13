@@ -12,13 +12,14 @@ const Product = () => {
       .catch(error => console.error('Error fetching product:', error));
   }, [id]);
 
+    console.log(product)
   if (!product) {
     return <p>Loading product details...</p>;
   }
 
   return (
     <div>
-      <h1>{product.name}</h1>
+      <h1>{product.title}</h1>
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
     </div>

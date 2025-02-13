@@ -1,15 +1,10 @@
 import React from "react";
-import { Container, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Divider } from "@mui/material";
+import { Container,Button, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Divider, CardActions } from "@mui/material";
 
 const Bill = ({ product }) => {
-    // const items = [
-    //     { name: "Laptop", price: 999.99, quantity: 1 },
-    //     { name: "Mouse", price: 25.49, quantity: 2 },
-    //     { name: "Keyboard", price: 49.99, quantity: 1 },
-    //     { name: "Monitor", price: 199.99, quantity: 1 },
-    //   ];
+
     let total = 0
-    console.log(product)
+    // console.log(product)
     product.cartdata.map((product) => {
         total += product.product.price * product.quantity
     })
@@ -22,23 +17,14 @@ const Bill = ({ product }) => {
                 borderRadius: 2,
                 boxShadow: 3,
                 bgcolor: "background.paper",
+                position: "sticky"
             }}
         >
-            {/* Receipt Header */}
+
             <Typography variant="h5" align="center" gutterBottom>
-                Total Items in Cart
+                Subtotal
             </Typography>
             <Divider sx={{ mb: 2 }} />
-
-            {/* Customer Details */}
-
-
-            <Divider sx={{ mb: 2 }} />
-
-            {/* Items Table */}
-            <Typography variant="h6" gutterBottom>
-                Items
-            </Typography>
             <TableContainer component={Paper} sx={{ mb: 2 }}>
                 <Table>
                     <TableHead>
@@ -73,9 +59,11 @@ const Bill = ({ product }) => {
 
             {/* Footer */}
             <Divider sx={{ mb: 2 }} />
-            <Typography variant="body2" align="center" color="text.secondary">
-                Thank you for your purchase!
-            </Typography>
+            <CardActions>
+                <Button size="small" variant="contained" color="primary" fullWidth>
+                    Checkout
+                </Button>
+            </CardActions>
         </Container>
     );
 };

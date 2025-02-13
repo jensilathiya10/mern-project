@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
 
 export const fetchCartData = createAsyncThunk('cartdata/fetch', async () => {
     const token = localStorage.getItem('token')
@@ -63,14 +65,14 @@ const cartSlice = createSlice({
                 state.status = 'success';
             })
 
-            .addCase(addCartData.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(addCartData.fulfilled, (state, action) => {
-                // state.cartProducts = action.payload;
-                state.status = 'success';
-                state.error = null; // Clear any previous errors
-            })
+            // .addCase(addCartData.pending, (state) => {
+            //     state.status = 'loading';
+            // })
+            // .addCase(addCartData.fulfilled, (state, action) => {
+            //     // state.cartProducts = action.payload;
+            //     state.status = 'success';
+            //     state.error = null; // Clear any previous errors
+            // })
             .addCase(addCartData.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message; // Store error message

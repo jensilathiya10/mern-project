@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addCartData, addQuantity, fetchCartData, removeCartData } from "../cartSlice";
 
 const Cartcard = ({ product }) => {
-  console.log(product)
+  // console.log(product)
   const dispatch = useDispatch();
 
   const handleRemove = ()=>{
@@ -43,7 +43,7 @@ const Cartcard = ({ product }) => {
 
       <CardActions>
           <Button size="small" variant="contained" color="primary" fullWidth>
-            Remove
+            Details
           </Button>
           <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
           <IconButton

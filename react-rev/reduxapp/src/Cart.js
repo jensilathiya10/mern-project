@@ -11,15 +11,6 @@ function Cart() {
         dispatch(fetchCartData())
     }, [dispatch])
     const { cartProducts, status } = useSelector((state) => state.cart)
-    console.log(status)
-    console.log(cartProducts.cartdata)
-
-
-    if (status == "success") {
-        cartProducts.cartdata.map((product) => {
-            console.log(product)
-        })
-    }
 
     if (status != "success") {
         return <h1>loading</h1>
@@ -27,7 +18,7 @@ function Cart() {
     return (
         <div >
             <div className="box" style={{display:"flex"}}>
-                <div className="cart" style={{ display: "flex", flexWrap: "wrap",flexGrow:1 ,maxWidth:"60vw" }}>
+                <div className="cart" style={{ display: "flex", flexWrap: "wrap",flexGrow:1 ,maxWidth:"60vw",maxHeight:"90vh",overflowY:"auto",scrollbarWidth: "none" }}>
                     {
                         cartProducts.cartdata.map((product) => (
                             <Cartcard product={product} />
