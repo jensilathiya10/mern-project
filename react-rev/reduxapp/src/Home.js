@@ -1,47 +1,23 @@
-import React, { useEffect } from 'react'
-import Logout from './Logout'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchuser } from './userSlice';
-function Home() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchuser())
-  }, [fetchuser])
-  const {userdata,loading,error}= useSelector((state) => state.users)
-  console.log(userdata)
+import React from 'react';
+import HeroSection from './components/Herosection';
+import ShippingInfo from './components/Shippinginfo';
+import HandpickedSection from './components/HandpickedSection';
+import SummerCollection from './components/SummerCollection';
+import BrandsSection from './components/BrandsSection';
+import CustomerTestimonials from './components/CustomerTestimonials';
 
-  if (loading) {
-    return <h1>Loading</h1>
-  }
+function Home() {
   return (
-    <div>
-      <h1>Home page</h1>
-      <Logout />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Roll</TableCell>
-              <TableCell>Class</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {userdata.usersdata.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row._id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.roll}</TableCell>
-                <TableCell>{row.classe}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <div className="home-container">
+      <HeroSection />
+      <ShippingInfo />
+      <HandpickedSection />
+      <SummerCollection />
+      <BrandsSection />
+      <CustomerTestimonials />
+      {/* <h1>hello</h1> */}
     </div>
-  )
+  );
 }
 
 export default Home;
