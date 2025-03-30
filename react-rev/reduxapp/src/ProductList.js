@@ -28,7 +28,7 @@ const ProductList = () => {
   .map((item) => item.category)
   .filter((value, index, self) => self.indexOf(value) === index);
 
-console.log(distinctCategories);
+// console.log(distinctCategories);
   if (status !== "success") {
     return <div>Loading...</div>;
   }

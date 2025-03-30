@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 const Cartcard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(product)
+  // console.log(product)
 
-  
+
 
   const handleRemove = () => {
     dispatch(removeCartData(product.product._id))

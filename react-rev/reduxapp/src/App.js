@@ -10,6 +10,7 @@ import PrivateRoute from './services/PrivateRoute';
 import Navbar from './utils/nav';
 import Cart from './Cart';
 import Signup from './Signup';
+import Logout from './Logout';
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path='/login' element={<Login />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/logout' element={<Logout />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<Product />} />
