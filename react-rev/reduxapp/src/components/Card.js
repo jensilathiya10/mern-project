@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, CardMedia, CardContent, CardActions, Typography, Button, Snackbar, Alert } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCartData, fetchCartData } from "../cartSlice";
 
@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
       return;
     }
     setNotification({ ...notification, open: false });
-  };
+  };  
   const [notification, setNotification] = useState({
     open: false,
     message: "",

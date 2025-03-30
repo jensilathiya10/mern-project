@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-
 
 export const fetchCartData = createAsyncThunk('cartdata/fetch', async () => {
     const token = localStorage.getItem('token')

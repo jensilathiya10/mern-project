@@ -7,6 +7,7 @@ const Bill = ({ product }) => {
     // console.log(product)
     product.cartdata.map((product) => {
         total += product.product.price * product.quantity
+        return total
     })
     return (
         <Container
