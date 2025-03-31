@@ -1,18 +1,49 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './nav.css';
+import { useEffect } from "react";
+ import {Badge } from "@mui/material";
+ import { useNavigate } from "react-router-dom";
+ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+ import IconButton from "@mui/material/IconButton";
+ import { useDispatch, useSelector } from "react-redux";
+ import { fetchCartData } from "../cartSlice";
+import { isAuthenticated } from '../services/auth';
+import { fetchuser } from '../userSlice';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { isAuth} = useSelector(
+    (state) => state.auth
+  );
 
+  useEffect(()=>{
+    dispatch(fetchCartData())
+    if (isAuth) {
+      dispatch(fetchuser());
+    }
+  },[dispatch,isAuthenticated()])  
+
+  // const isUserAuthenticated = userdata !== null;
+  // console.log(userdata)
+
+  const { cartProducts, status } = useSelector((state)=>state.cart)
+  let count = 0
+  // console.log(cartProducts,status)
+
+  if(status == "success" && isAuthenticated()){
+    count = cartProducts.cartdata.length
+  }
   const navLinks = [
-    { name: 'Home', path: '/home' },
+    { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Login', path: '/login' },
     { name: 'Register', path: '/register' },
-    { name: 'Logout', path: '/logout' },
-    { name: 'Products', path: '/products' },
+    { name: 'Products', path: '/products' },  
+    { name: isAuthenticated()?'Logout':'Login', path: isAuthenticated()? '/logout':'/login' }
+    // { name: 'Login', path: '/login' },
   ];
 
   return (
@@ -32,7 +63,16 @@ const Navbar = () => {
         <div className="navbar-icons">
           <button className="navbar-icon">🔍</button>
           <button className="navbar-icon">👤</button>
-          <button className="navbar-icon">🛒</button>
+          <IconButton
+           edge="end"
+           color="inherit"
+           aria-label="cart"
+           onClick={()=>navigate('/cart')}>
+            <Badge badgeContent={count} color="error">
+               <ShoppingCartIcon />
+             </Badge>
+             </IconButton>
+      
         </div>
 
         {/* Mobile Menu Toggle */}

@@ -3,15 +3,16 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography, Container, Paper } from "@mui/material";
+import { useDispatch } from 'react-redux';
+import { setAuthenticated } from './authSlice';
 function Login() {
   const [name, setName] = useState('');
   const [roll, setRoll] = useState('');
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // redirect to home page if user is already logged in
   useEffect(()=>{
     const token = localStorage.getItem('token')
-    console.log(token)
     if(token) {
       navigate("/")
     }
@@ -23,8 +24,8 @@ function Login() {
     try {
       const res = await axios.post('http://localhost:8000/login', { name, roll })
       const token = res.data.token
-      console.log(token)
       localStorage.setItem('token', token)
+      dispatch(setAuthenticated(true))
       navigate("/")
     } catch (error) {
       console.log(error.message)
@@ -33,7 +34,7 @@ function Login() {
   };
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      {/* <h2>Login</h2> */}
       {/* <form onSubmit={handleSubmit}>
         <div className="input-group">
           <label>Email:</label>

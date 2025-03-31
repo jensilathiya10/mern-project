@@ -1,5 +1,5 @@
 const users = require('../models/users');
-const { setUser, getUser } = require("../middlewares/auth");
+const { setUser } = require("../middlewares/auth");
 const cart = require("../models/cart")
 
 
@@ -34,9 +34,7 @@ const verifyuser = async (req, res) => {
 }
 
 const alluser = async (req, res) => {
-    // console.log(req.user._doc._id)
     if (req.user) {
-
         const usersdata = await users.find({});
         res.json({ usersdata })
     }

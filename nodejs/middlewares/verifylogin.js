@@ -6,7 +6,7 @@ const verifyisloggedin = (req,res,next)=>{
         const user = getUser(token)
 
     if(!uid || user==null){
-        res.json({"message":"UNAUTHORIZED ACCESS"});
+        res.status(401).json({"message":"UNAUTHORIZED ACCESS"});
     }
     else{
         req.user = user
