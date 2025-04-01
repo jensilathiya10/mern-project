@@ -28,15 +28,6 @@ const Product = () => {
     dispatch(fetchCartData());
   }, [id, dispatch]);
 
-  const handleRemove = () => {
-    dispatch(removeCartData(product._id))
-      .then(() => dispatch(fetchCartData()));
-  };
-
-  const handleAdd = () => {
-    dispatch(addQuantity(product._id))
-      .then(() => dispatch(fetchCartData()));
-  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
@@ -45,7 +36,8 @@ const Product = () => {
 
   const addtocart = async () => {
     try {
-      await dispatch(addCartData(product._id));
+      console.log(quantity)
+      await dispatch(addCartData({product:product._id,quantity:quantity}))
       setNotification({ open: true, message: `Product added to cart!`, severity: "success" });
       dispatch(fetchCartData());
     } catch (error) {
@@ -54,11 +46,11 @@ const Product = () => {
   };
 
   const increaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
+    setQuantity(x=>x+1);
   };
 
   const decreaseQuantity = () => {
-    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    setQuantity(x=>x-1);
   };
 
   const toggleWishlist = () => {

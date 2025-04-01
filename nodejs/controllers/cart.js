@@ -62,9 +62,11 @@ const addproducttocart = async (req, res) => {
         })
 
         if (selectedproduct.length > 0) {
+            console.log(req.body)
             selectedproduct[0].quantity += Number(req.body.quantity)
         }
         else {
+            
             await user.cart.push({
                 product: req.body.product,
                 quantity: Number(req.body.quantity)

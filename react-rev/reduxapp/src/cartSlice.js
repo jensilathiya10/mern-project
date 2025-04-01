@@ -14,6 +14,7 @@ export const fetchCartData = createAsyncThunk('cartdata/fetch', async () => {
 
 export const addCartData = createAsyncThunk('cartdata/add', async ({product,quantity}) => {
     const token = localStorage.getItem('token')
+    // console.log(quantity)
     const response = await axios.post('http://localhost:8000/user/cart', {product,quantity},
         {
         headers: {
