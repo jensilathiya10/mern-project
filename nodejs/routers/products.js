@@ -8,10 +8,12 @@ router.get("/:id", getproduct);
 // Add new product
 router.post("/", async (req, res) => {
     const product = new Product({
-        name: req.body.name,
+        title: req.body.title,
         description: req.body.description,
         price: req.body.price,
-        image: req.body.image
+        image: req.body.image,
+        category:req.body.category,
+        modelsfor:req.body.modelsfor
     });
 
     try {

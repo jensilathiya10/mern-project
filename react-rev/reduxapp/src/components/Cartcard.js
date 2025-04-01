@@ -9,16 +9,13 @@ import { useNavigate } from "react-router-dom";
 const Cartcard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // console.log(product)
-
-
 
   const handleRemove = () => {
     dispatch(removeCartData(product.product._id))
       .then(() => dispatch(fetchCartData()))
   }
   const handleAdd = () => {
-    dispatch(addQuantity(product.product._id))
+    dispatch(addQuantity({product:product.product._id,quantity:1}))
       .then(() => dispatch(fetchCartData()))
   }
 
