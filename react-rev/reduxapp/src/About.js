@@ -62,11 +62,9 @@ const About = () => {
           <button className="button">Get Started</button>
         </div>
         <div className="hero-image">
-          <img src= {modelPink} alt="Woman in black with orange fabric" />
           <div className="testimonial-container1">
-            <div className="testimonial">
-            </div>
-                </div>
+            <div className="testimonial">   </div>     </div>
+          <img src= {modelPink} alt="Woman in black with orange fabric" />
           
         </div>
       </section>
