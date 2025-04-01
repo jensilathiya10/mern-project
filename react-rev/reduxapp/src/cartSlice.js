@@ -12,9 +12,9 @@ export const fetchCartData = createAsyncThunk('cartdata/fetch', async () => {
     return response.data;
 });
 
-export const addCartData = createAsyncThunk('cartdata/add', async (product) => {
+export const addCartData = createAsyncThunk('cartdata/add', async ({product,quantity}) => {
     const token = localStorage.getItem('token')
-    const response = await axios.post('http://localhost:8000/user/cart', {product},
+    const response = await axios.post('http://localhost:8000/user/cart', {product,quantity},
         {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -24,9 +24,9 @@ export const addCartData = createAsyncThunk('cartdata/add', async (product) => {
     return response.data;
 });
 
-export const addQuantity = createAsyncThunk('cartdata/addquantity', async (product) => {
+export const addQuantity = createAsyncThunk('cartdata/addquantity', async ({product,quantity}) => {
     const token = localStorage.getItem('token')
-    const response = await axios.put('http://localhost:8000/user/cart/add', {product},
+    const response = await axios.put('http://localhost:8000/user/cart/add', {product,quantity},
         {
         headers: {
             Authorization: `Bearer ${token}`,

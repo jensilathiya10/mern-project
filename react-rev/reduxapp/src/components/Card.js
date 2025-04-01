@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
   });
   const addtocart = async () => {
     try {
-      await dispatch(addCartData(product._id))
+      await dispatch(addCartData({product:product._id,quantity:1}))
       setNotification({
         open: true,
         message: `Product added to cart!`,
