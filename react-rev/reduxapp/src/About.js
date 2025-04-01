@@ -1,89 +1,167 @@
-import React from "react";
+import React from 'react';
 import { Container, Typography, Box, Grid, Card, CardContent, Avatar } from "@mui/material";
+import './About.css';
+import modelPink from './images/5.jpg';
 
 const About = () => {
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Far far away",
+      subtitle: "behind the word mountains",
+      excerpt: "Far far away, behind the word mountains...",
+      date: "April 03, 2023",
+      author: "Admin",
+      comments: 3
+    },
+    {
+      id: 2,
+      title: "Far far away",
+      subtitle: "behind the word mountains",
+      excerpt: "Far far away, behind the word mountains...",
+      date: "April 03, 2023",
+      author: "Admin",
+      comments: 3
+    },
+    {
+      id: 3,
+      title: "Far far away",
+      subtitle: "behind the word mountains",
+      excerpt: "Far far away, behind the word mountains...",
+      date: "April 03, 2023",
+      author: "Admin",
+      comments: 3
+    },
+    {
+      id: 4,
+      title: "Far far away",
+      subtitle: "behind the word mountains",
+      excerpt: "Far far away, behind the word mountains...",
+      date: "April 03, 2023",
+      author: "Admin",
+      comments: 3
+    },
+    {
+      id: 5,
+      title: "Far far away",
+      subtitle: "behind the word mountains",
+      excerpt: "Far far away, behind the word mountains...",
+      date: "April 03, 2023",
+      author: "Admin",
+      comments: 3
+    }
+  ];
+
   return (
-    <Container>
-      {/* Main Heading */}
-      <Box sx={{ mt: 4, textAlign: "center" }}>
-        <Typography variant="h3" gutterBottom>
-          About Us
-        </Typography>
-        <Typography variant="h6" color="textSecondary">
-          Delivering Excellence, Innovation, and Quality hello theree
-        </Typography>
-      </Box>
+    <div className="about-container">
+      {/* Hero section */}
+      <section className="hero-section">
+        <div className="hero-text">
+          <h1>Create, Code, and Published.</h1>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          <button className="button">Get Started</button>
+        </div>
+        <div className="hero-image">
+          <img src= {modelPink} alt="Woman in black with orange fabric" />
+          <div className="testimonial-container1">
+            <div className="testimonial">
+            </div>
+                </div>
+          
+        </div>
+      </section>
 
-      {/* Company Overview */}
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Who We Are
-        </Typography>
-        <Typography variant="body1">
-          Welcome to My Website! We are a company dedicated to providing high-quality products and exceptional services to our customers. 
-          With years of experience, we strive to bring innovative solutions that make a difference.
-        </Typography>
-      </Box>
+      {/* Features section */}
+      <section className="features-section">
+        <h2>Far far away, behind the word mountains, far from the countries Vokalia.</h2>
+        
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon blue">
+              <span>🔍</span>
+            </div>
+            <h3>Explore all courses</h3>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
+          </div>
+          
+          <div className="feature-card">
+            <div className="feature-icon blue">
+              <span>📚</span>
+            </div>
+            <h3>Create new skills</h3>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
+          </div>
+          
+          <div className="feature-card">
+            <div className="feature-icon blue">
+              <span>🧠</span>
+            </div>
+            <h3>Improve your skills</h3>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia.</p>
+          </div>
+        </div>
+      </section>
 
-      {/* Our Mission & Values */}
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Our Mission & Values
-        </Typography>
-        <Typography variant="body1">
-          Our mission is to enhance customer satisfaction through cutting-edge products and top-tier customer support. 
-          We uphold values such as integrity, innovation, and excellence in all our endeavors.
-        </Typography>
-      </Box>
+      {/* Content section with image */}
+      <section className="content-section">
+        <div className="content-text">
+          <h2>Far far away, behind the word mountains</h2>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+          <ul>
+            <li>✓ Behind the word mountains</li>
+            <li>✓ Far far away mountains</li>
+            <li>✓ Large language ocean</li>
+          </ul>
+          <button className="primary-button">Learn More</button>
+        </div>
+        <div className="content-image">
+          <img src= {modelPink} alt="Woman with camera" />
+        </div>
+      </section>
 
-      {/* Meet the Team */}
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Meet Our Team
-        </Typography>
-        <Grid container spacing={3} sx={{ mt: 2 }}>
-          {/* Team Member 1 */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardContent sx={{ textAlign: "center" }}>
-                <Avatar sx={{ width: 80, height: 80, margin: "auto" }} src="https://via.placeholder.com/80" />
-                <Typography variant="h6" sx={{ mt: 2 }}>John Doe</Typography>
-                <Typography variant="body2" color="textSecondary">CEO & Founder</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+      {/* Testimonial section */}
+      <section className="testimonial-section">
+        <div className="testimonial-container">
+          <div className="testimonial-icon">
+            <span>💬</span>
+          </div>
+          <p className="quote">"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</p>
+          <div className="testimonial-footer">
+            <span>Maria Anderson</span>
+            <span className="separator">•</span>
+            <span>Designer at Studio</span>
+          </div>
+          <div className="testimonial-pagination">
+            <span className="dot active"></span>
+            <span className="dot"></span>
+            <span className="dot"></span>
+          </div>
+        </div>
+      </section>
 
-          {/* Team Member 2 */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardContent sx={{ textAlign: "center" }}>
-                <Avatar sx={{ width: 80, height: 80, margin: "auto" }} src="https://via.placeholder.com/80" />
-                <Typography variant="h6" sx={{ mt: 2 }}>Jane Smith</Typography>
-                <Typography variant="body2" color="textSecondary">CTO</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Team Member 3 */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardContent sx={{ textAlign: "center" }}>
-                <Avatar sx={{ width: 80, height: 80, margin: "auto" }} src="https://via.placeholder.com/80" />
-                <Typography variant="h6" sx={{ mt: 2 }}>Michael Lee</Typography>
-                <Typography variant="body2" color="textSecondary">Lead Developer</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-
-      {/* Footer Message */}
-      <Box sx={{ mt: 6, textAlign: "center", paddingBottom: 4 }}>
-        <Typography variant="body1">
-          Thank you for visiting our website! We are always here to help and look forward to serving you.
-        </Typography>
-      </Box>
-    </Container>
+      {/* Blog section */}
+      <section className="blog-section">
+        <h2>Latest Blog Posts</h2>
+        <div className="blog-grid">
+          {blogPosts.map(post => (
+            <div key={post.id} className="blog-card">
+              <div className="blog-info">
+                <h3>{post.title}</h3>
+                <p className="blog-subtitle">{post.subtitle}</p>
+                <p className="blog-excerpt">{post.excerpt}</p>
+                <div className="blog-meta">
+                  <span>{post.date}</span>
+                  <span className="separator">•</span>
+                  <span>{post.author}</span>
+                  <span className="separator">•</span>
+                  <span>{post.comments} comments</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 
