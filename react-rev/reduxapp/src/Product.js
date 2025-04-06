@@ -12,6 +12,7 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [selectedModel,setSelectedModel] = useState("");
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [notification, setNotification] = useState({
     open: false,
@@ -27,7 +28,7 @@ const Product = () => {
       .catch(error => console.error('Error fetching product:', error));
     dispatch(fetchCartData());
   }, [id, dispatch]);
-
+  console.log(product)
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") return;
@@ -35,40 +36,46 @@ const Product = () => {
   };
 
   const addtocart = async () => {
+    console.log(product)
     try {
-      console.log(quantity)
-      await dispatch(addCartData({product:product._id,quantity:quantity}))
-      setNotification({ open: true, message: `Product added to cart!`, severity: "success" });
-      dispatch(fetchCartData());
+      if(!(selectedModel=="" && product.category == "mobile cover")){
+        await dispatch(addCartData({ product: product._id, quantity: quantity,model:selectedModel }))
+        setNotification({ open: true, message: `Product added to cart!`, severity: "success" });
+        dispatch(fetchCartData());
+      }
+      else{
+        setNotification({ open: true, message: `Please Select Model`, severity: "error" });
+      }
     } catch (error) {
       setNotification({ open: true, message: `Error! Please Try Again`, severity: "error" });
     }
   };
 
   const increaseQuantity = () => {
-    setQuantity(x=>x+1);
+    setQuantity(x => x + 1);
   };
 
   const decreaseQuantity = () => {
-    setQuantity(x=>x-1);
+    setQuantity(x => x - 1);
   };
 
   const toggleWishlist = () => {
     setIsWishlisted(prev => !prev);
   };
+  // console.log(selectedModel)
 
   if (!product) return <p>Loading product details...</p>;
 
   return (
     <div>
-     
-      
+
+
       <div className="product-page">
         <div className="product-container">
           <div className="back-button"><span>&#8249; Back</span></div>
           <div className="product-details">
             <div className="product-image-container">
-              <img src={modelPink} alt="Product" className="product-image" />
+              <img src={product.image} alt="Product" className="product-image" />
             </div>
             <div className="product-info">
               <h1>{product.title}</h1>
@@ -77,12 +84,16 @@ const Product = () => {
 
               <div className="product-options">
                 <div className="option-row">
-                  <div className="dropdown">
-                    <div className="dropdown-header">
-                      <span>Model</span>
-                      <span className="dropdown-arrow">&#9660;</span>
-                    </div>
-                  </div>
+                  {product.modelsfor != "" && <div className="dropdown">
+                    <select name="selectedmodel" id="" onChange={(e)=>setSelectedModel(e.target.value)}>
+                      <option value="">Please Select Model</option>
+                      {
+                        product.modelsfor.map(element => (
+                          <option value={element}>{element}</option>
+                        ))
+                      }
+                    </select>
+                  </div>}
 
                   <div className="dropdown">
                     <div className="dropdown-header">
@@ -92,31 +103,31 @@ const Product = () => {
                   </div>
                 </div>
 
-              <div className="quantity-row">
-                <div className="quantity-selector">
-                  <div className="quantity-display">{quantity.toString().padStart(2, "0")}</div>
-                  <div className="quantity-controls">
-                    <button className="quantity-button" onClick={increaseQuantity}>&#9650;</button>
-                    <button className="quantity-button" onClick={decreaseQuantity}>&#9660;</button>
+                <div className="quantity-row">
+                  <div className="quantity-selector">
+                    <div className="quantity-display">{quantity.toString().padStart(2, "0")}</div>
+                    <div className="quantity-controls">
+                      <button className="quantity-button" onClick={increaseQuantity}>&#9650;</button>
+                      <button className="quantity-button" onClick={decreaseQuantity}>&#9660;</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="wishlist-row" onClick={toggleWishlist}>
-                <div className={`wishlist-icon ${isWishlisted ? "wishlisted" : ""}`}>
-                  {isWishlisted ? "♥" : "♡"}
+                <div className="wishlist-row" onClick={toggleWishlist}>
+                  <div className={`wishlist-icon ${isWishlisted ? "wishlisted" : ""}`}>
+                    {isWishlisted ? "♥" : "♡"}
+                  </div>
+                  <Button onClick={addtocart} size="small" variant="contained" color="primary" fullWidth>
+                    Add to Cart
+                  </Button><Snackbar open={notification.open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                    <Alert onClose={handleClose} severity={notification.severity} sx={{ width: "100%" }}>
+                      {notification.message}
+                    </Alert>
+                  </Snackbar>
+                  <br />
+                  <div className="shipping-info">FREE SHIPPING ON ORDERS 50 USD</div>
                 </div>
-                <Button onClick={addtocart} size="small" variant="contained" color="primary" fullWidth>
-        Add to Cart
-      </Button><Snackbar open={notification.open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
-        <Alert onClose={handleClose} severity={notification.severity} sx={{ width: "100%" }}>
-          {notification.message}
-        </Alert>
-      </Snackbar>
-             <br/>
-      <div className="shipping-info">FREE SHIPPING ON ORDERS 50 USD</div>
-              </div>
-</div></div></div></div></div></div>
-   
+              </div></div></div></div></div></div>
+
   );
 };
 

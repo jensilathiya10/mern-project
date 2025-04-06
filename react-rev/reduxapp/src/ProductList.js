@@ -17,6 +17,7 @@ const ProductList = () => {
   }
 
   const {products,status} = useSelector((state) => state.products)
+  console.log(products)
   const [selectedcat,setSelectedcat] = new useState("");
 
   var data = Object.values(products).filter(x=>x.category===selectedcat)

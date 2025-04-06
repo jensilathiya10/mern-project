@@ -10,12 +10,13 @@ const Cartcard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // console.log(product.model)
   const handleRemove = () => {
-    dispatch(removeCartData(product.product._id))
+    dispatch(removeCartData({product:product.product._id,model:product.model}))
       .then(() => dispatch(fetchCartData()))
   }
   const handleAdd = () => {
-    dispatch(addQuantity({product:product.product._id,quantity:1}))
+    dispatch(addQuantity({product:product.product._id,quantity:1,model:product.model}))
       .then(() => dispatch(fetchCartData()))
   }
 
@@ -41,6 +42,9 @@ const Cartcard = ({ product }) => {
         <Typography variant="body2" sx={{ flexGrow: 1, flexDirection: "column" }} color="text.secondary">
           {product.product.description}
         </Typography>
+        {product.model != "" && <Typography variant="body2" sx={{ mt: "5px", fontWeight: "normal", color: "primary.main" }}>
+          {product.model}
+        </Typography>}
         <Typography variant="h6" sx={{ mt: "auto", fontWeight: "bold", color: "primary.main" }}>
           ${product.product.price}
         </Typography>

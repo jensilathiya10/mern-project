@@ -58,10 +58,10 @@ const ProductCard = ({ product }) => {
         {/* Product Details */}
         <CardContent sx={{ flexGrow: 1 }}>
           <Typography variant="h6" component="div" gutterBottom>
-            {product.title}
+            {product.title.substring(0,30)}...
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {product.description}
+            {product.description.substring(0,80)}......
           </Typography>
           <Typography variant="h6" sx={{ mt: 2, fontWeight: "bold", color: "primary.main" }}>
             ${product.price}
@@ -70,9 +70,9 @@ const ProductCard = ({ product }) => {
 
         {/* Actions (Buttons) */}
         <CardActions>
-          <Button onClick={() => addtocart()} size="small" variant="contained" color="primary" fullWidth>
+          {product.category != "mobile cover" && <Button onClick={() => addtocart()} size="small" variant="contained" color="primary" fullWidth>
             Add to Cart
-          </Button>
+          </Button>}
           <Button onClick={()=>viewmore()} size="small" variant="outlined" color="secondary" fullWidth>
             View More
           </Button>

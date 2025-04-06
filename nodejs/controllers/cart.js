@@ -20,8 +20,10 @@ const removeproductfromcart = async (req, res) => {
             return res.status(404).json({ message: "user not found" })
         }
 
+        // console.log(req.body)
+
         const selectedproduct = user.cart.filter((item) => {
-            if (item.product.toString() == req.body.product) {
+            if (item.product.toString() == req.body.product && item.model == req.body.model) {
                 return item
             }
 
@@ -32,7 +34,13 @@ const removeproductfromcart = async (req, res) => {
                 selectedproduct[0].quantity -= 1
             }
             else {
-                user.cart = user.cart.filter((item) => item.product.toString() !== req.body.product);
+                user.cart = user.cart.filter((item) => {
+                    console.log(item)
+                    if(!(item.product.toString() == req.body.product && item.model == req.body.model)){
+                        return item
+                    }
+                });
+                console.log(user.cart)
             }
         }
 
@@ -55,21 +63,22 @@ const addproducttocart = async (req, res) => {
         }
 
         const selectedproduct = user.cart.filter((item) => {
-            if (item.product.toString() == req.body.product) {
+            if (item.product.toString() == req.body.product && item.model == req.body.model) {
                 return item
             }
 
         })
 
-        if (selectedproduct.length > 0) {
-            console.log(req.body)
+        if (selectedproduct.length > 0 && selectedproduct[0].model == req.body.model) {
+            // console.log(req.body)
             selectedproduct[0].quantity += Number(req.body.quantity)
         }
         else {
             
             await user.cart.push({
                 product: req.body.product,
-                quantity: Number(req.body.quantity)
+                quantity: Number(req.body.quantity),
+                model:req.body.model
             });
         }
         user.save();

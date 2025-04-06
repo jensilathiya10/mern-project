@@ -11,6 +11,7 @@ import Navbar from './utils/nav';
 import Cart from './Cart';
 import Signup from './Signup';
 import Logout from './Logout';
+import Addproduct from "./admin/Addproduct"
 function App() {
   return (
     <BrowserRouter>
@@ -22,8 +23,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<Product />} />
-        <Route path='/cart' element={<Cart/>}/>
+        <Route path='/cart' element={<PrivateRoute><Cart/></PrivateRoute>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/admin/addproduct" element={<Addproduct/>}/>
       </Routes>
     </BrowserRouter>
   )
