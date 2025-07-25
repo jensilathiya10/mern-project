@@ -5,11 +5,10 @@ const cart = require("../models/cart")
 
 const addnewuser = async (req, res) => {
     try {
-        const { uname, roll, classe } = req.body;
+        const { uname, password } = req.body;
         const user= new users({
             name:uname,
-            roll,
-            classe
+            password:password
         })
         user.save()
         return res.status(200).json({ message: "user added successfully" })
@@ -20,9 +19,9 @@ const addnewuser = async (req, res) => {
 }
 
 const verifyuser = async (req, res) => {
-    const { name, roll } = req.body;
-    console.log(name,roll)
-    const userr = await users.findOne({ name, roll });
+    const { name, password } = req.body;
+    console.log(name,password)
+    const userr = await users.findOne({ name, password });
     if (userr == null) {
         res.status(401).json({ "message": "INVALID USERNAME OR PASSWORD" })
     }

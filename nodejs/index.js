@@ -5,8 +5,11 @@ const db = require("./config");
 const userrouter = require('./routers/users');
 const productRouter = require('./routers/products'); // Added product routes
 const staticrouter = require('./routers/static');
+const catrouter = require('./routers/Category');
+const brandrouter = require('./routers/brands');
 const cookieParser = require('cookie-parser');
 const verifyisloggedin = require("./middlewares/verifylogin");
+
 
 db();
 var cors = require('cors');
@@ -20,6 +23,9 @@ app.use(cookieParser());
 app.use("/", staticrouter);
 app.use('/user', verifyisloggedin, userrouter);
 app.use('/products', productRouter); // New product routes
+app.use('/categories',catrouter)
+app.use('/uploads', express.static('uploads'));
+app.use('/brands',brandrouter)
 
 app.listen(8000, () => {
     console.log("App running on port 8000");

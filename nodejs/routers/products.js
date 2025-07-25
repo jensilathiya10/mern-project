@@ -1,28 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
-const { getproduct } = require("../controllers/product");
+const { getproduct, addproduct } = require("../controllers/product");
 
 router.get("/", getproduct);
 router.get("/:id", getproduct);
-// Add new product
-router.post("/", async (req, res) => {
-    const product = new Product({
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        image: req.body.image,
-        category:req.body.category,
-        modelsfor:req.body.modelsfor
-    });
+const multer = require('multer');
+const path = require('path');
 
-    try {
-        const newProduct = await product.save();
-        res.status(201).json(newProduct);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Destination folder
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const ext = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+  }
 });
+const upload = multer({ storage: storage });
+router.post("/", upload.array('images', 10),addproduct);
+
 
 // Update a product
 router.put("/:id", async (req, res) => {

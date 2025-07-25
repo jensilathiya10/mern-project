@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const Cartcard = ({ product }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  
   // console.log(product.model)
+  const dispatch = useDispatch();
   const handleRemove = () => {
     dispatch(removeCartData({product:product.product._id,model:product.model}))
       .then(() => dispatch(fetchCartData()))
@@ -25,12 +25,12 @@ const Cartcard = ({ product }) => {
   }
 
   return (
-    <Card sx={{ display: 'flex', flexDirection: 'column', maxWidth: 345, m: 2, boxShadow: 3, borderRadius: 2 }}>
+    <Card sx={{ display: 'flex',width:"-webkit-fill-available", flexDirection: 'column', maxWidth: 345, m: 2, boxShadow: 3, borderRadius: 2 }}>
       {/* Product Image */}
       <CardMedia
         component="img"
         height="200"
-        image={product.product.image}
+        image={`http://localhost:8000/${product.product.image[0].replace(/\\/g, '/')}`}
         alt={product.product.title}
         sx={{ objectFit: "cover" }}
       />
@@ -40,18 +40,18 @@ const Cartcard = ({ product }) => {
           {product.product.title}
         </Typography>
         <Typography variant="body2" sx={{ flexGrow: 1, flexDirection: "column" }} color="text.secondary">
-          {product.product.description}
+          {product.product.description.substring(0,80)}......
         </Typography>
         {product.model != "" && <Typography variant="body2" sx={{ mt: "5px", fontWeight: "normal", color: "primary.main" }}>
           {product.model}
         </Typography>}
-        <Typography variant="h6" sx={{ mt: "auto", fontWeight: "bold", color: "primary.main" }}>
+        <Typography variant="h6" sx={{ mt: "auto", fontWeight: "bold", color: "black" }}>
           ${product.product.price}
         </Typography>
       </CardContent>
 
       <CardActions>
-        <Button onClick={()=>viewmore()} size="small" variant="contained" color="primary" fullWidth>
+        <Button onClick={()=>viewmore()} size="small" variant="contained" style={{backgroundColor:"#e29f4d"}} fullWidth>
           Details
         </Button>
         <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>

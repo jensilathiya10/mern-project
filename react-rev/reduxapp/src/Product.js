@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartData, addQuantity, fetchCartData, removeCartData } from './cartSlice';
@@ -19,7 +19,7 @@ const Product = () => {
     message: "",
     severity: "success",
   });
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Product = () => {
   const addtocart = async () => {
     console.log(product)
     try {
-      if(!(selectedModel=="" && product.category == "mobile cover")){
+      if(!(selectedModel=="" && product.hasModels == "yes")){
         await dispatch(addCartData({ product: product._id, quantity: quantity,model:selectedModel }))
         setNotification({ open: true, message: `Product added to cart!`, severity: "success" });
         dispatch(fetchCartData());
@@ -70,12 +70,12 @@ const Product = () => {
     <div>
 
 
-      <div className="product-page">
+      <div className="product-page" style={{backgroundColor:"#fffbf5"}}>
         <div className="product-container">
-          <div className="back-button"><span>&#8249; Back</span></div>
+          <div className="back-button" onClick={()=>navigate('../products')}><span>&#8249; Back</span></div>
           <div className="product-details">
             <div className="product-image-container">
-              <img src={product.image} alt="Product" className="product-image" />
+              <img src={`http://localhost:8000/${product.image[0].replace(/\\/g, '/')}`} alt="Product" className="product-image" />
             </div>
             <div className="product-info">
               <h1>{product.title}</h1>
@@ -85,7 +85,7 @@ const Product = () => {
               <div className="product-options">
                 <div className="option-row">
                   {product.modelsfor != "" && <div className="dropdown">
-                    <select name="selectedmodel" id="" onChange={(e)=>setSelectedModel(e.target.value)}>
+                    <select style={{border: "none",outline: "none",width: "-webkit-fill-available"}} name="selectedmodel" id="" onChange={(e)=>setSelectedModel(e.target.value)}>
                       <option value="">Please Select Model</option>
                       {
                         product.modelsfor.map(element => (

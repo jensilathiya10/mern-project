@@ -12,9 +12,14 @@ import Cart from './Cart';
 import Signup from './Signup';
 import Logout from './Logout';
 import Addproduct from "./admin/Addproduct"
+import ScrollToTop from './ScrollToTop';
+import Contact from './Contact';
+import MobileBrands from './admin/MobileBrands';
+import Products from './admin/Products';
 function App() {
   return (
     <BrowserRouter>
+        <ScrollToTop/>
       <Navbar/>
       <Routes>
         <Route path='/' element={<PrivateRoute><Home /></PrivateRoute>} />
@@ -25,7 +30,12 @@ function App() {
         <Route path="/products/:id" element={<Product />} />
         <Route path='/cart' element={<PrivateRoute><Cart/></PrivateRoute>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/contact" element={<Contact/>}/>
         <Route path="/admin/addproduct" element={<Addproduct/>}/>
+        <Route path="/admin/addbrand" element={<MobileBrands/>}/>
+        <Route path="/admin/products" element={<Products/>}/>
+
+
       </Routes>
     </BrowserRouter>
   )

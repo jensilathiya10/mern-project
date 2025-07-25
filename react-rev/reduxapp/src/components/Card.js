@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardMedia, CardContent, CardActions, Typography, Button, Snackbar, Alert } from "@mui/material";
+import { Card, CardMedia, CardContent, CardActions, Typography, Button, Snackbar, Alert, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCartData, fetchCartData } from "../cartSlice";
@@ -45,12 +45,17 @@ const ProductCard = ({ product }) => {
   return (
     <>
 
-      <Card sx={{ display: 'flex', flexDirection: 'column', maxWidth: 345, m: 2, boxShadow: 3, borderRadius: 2 }}>
+      <Card sx={{ display: 'flex', flexDirection: 'column', minWidth: '250px',flex: '1 1 calc((100% - 48px) / 4)', maxWidth: '300px', m: 2, boxShadow: 3, borderRadius: 2, 
+    transition: 'all 0.4s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.05)', // animatable
+      boxShadow: 6,             // animatable
+    } }}>
         {/* Product Image */}
         <CardMedia
           component="img"
           height="200"
-          image={product.image}
+          image={`http://localhost:8000/${product.image[0].replace(/\\/g, '/')}`}
           alt={product.title}
           sx={{ objectFit: "cover" }}
         />
@@ -63,20 +68,23 @@ const ProductCard = ({ product }) => {
           <Typography variant="body2" color="text.secondary">
             {product.description.substring(0,80)}......
           </Typography>
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: "bold", color: "primary.main" }}>
-            ${product.price}
-          </Typography>
         </CardContent>
 
         {/* Actions (Buttons) */}
+        <Box>
+          <Typography variant="h6" sx={{ ml:2 , fontWeight: "bold", color: "000000a6" }}>
+            ${product.price}
+          </Typography>
+     
         <CardActions>
-          {product.category != "mobile cover" && <Button onClick={() => addtocart()} size="small" variant="contained" color="primary" fullWidth>
+          {product.hasModels != "yes" && <Button onClick={() => addtocart()} size="small" variant="contained" sx={{backgroundColor:"#e29f4d"}} fullWidth>
             Add to Cart
           </Button>}
-          <Button onClick={()=>viewmore()} size="small" variant="outlined" color="secondary" fullWidth>
+          <Button onClick={()=>viewmore()} size="small" variant="contained" sx={{borderColor:"#e29f4d",color:"#ffffffff",backgroundColor:"#d0aa7bff"}} fullWidth>
             View More
           </Button>
         </CardActions>
+           </Box>
       </Card>
       <Snackbar
         open={notification.open}

@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const userschema = mongoose.Schema({
   name: String,
-  roll: Number,
-  classe: String,
+  password:String,
   cart: [
     {
       product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },

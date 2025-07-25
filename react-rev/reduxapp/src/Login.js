@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setAuthenticated } from './authSlice';
 function Login() {
   const [name, setName] = useState('');
-  const [roll, setRoll] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // redirect to home page if user is already logged in
@@ -22,7 +22,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8000/login', { name, roll })
+      const res = await axios.post('http://localhost:8000/login', { name, password })
       const token = res.data.token
       localStorage.setItem('token', token)
       dispatch(setAuthenticated(true))
@@ -79,8 +79,8 @@ function Login() {
             type="password"
             variant="outlined"
             fullWidth
-            value={roll}
-            onChange={(e) => setRoll(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
 

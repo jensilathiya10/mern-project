@@ -6,8 +6,7 @@ const Signup = () => {
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
-    roll: "",
-    class: "",
+    password:""
   });
 
   const handleChange = (e) => {
@@ -20,11 +19,11 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     const uname = formData.username
-    const roll = formData.roll
-    const classe = formData.class
+    const password = formData.password
+    console(uname,password)
     e.preventDefault();
     try {
-        const res = await axios.post('http://localhost:8000/signup', {uname,roll,classe})
+        const res = await axios.post('http://localhost:8000/signup', {uname,password})
         if(res.status===200){
             navigate("/")
         }
@@ -63,20 +62,10 @@ const Signup = () => {
           />
           <TextField
             fullWidth
-            label="Roll"
-            type="number"
-            name="roll"
-            value={formData.roll}
-            onChange={handleChange}
-            margin="normal"
-            required
-          />
-          <TextField
-            fullWidth
-            label="class"
+            label="Password"
             type="text"
-            name="class"
-            value={formData.class}
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             margin="normal"
             required

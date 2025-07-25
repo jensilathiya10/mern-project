@@ -53,7 +53,7 @@ const About = () => {
   ];
 
   return (
-    <div className="about-container">
+    <div className="about-container" style={{backgroundColor:"#fffbf5"}}>
       {/* Hero section */}
       <section className="hero-section">
         <div className="hero-text">
